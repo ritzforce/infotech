@@ -9,7 +9,7 @@ var logger = require('./../../logger/logger');
 /***********************************************/
 
 var selectFields = ['id', 'paperId', 'questionId', 'correct', 'answer', 'createdDate', 'lastModifiedDate'];
-var TBL_NAME = 'paperanswer';
+var TBL_NAME = 'paperAnswer';
 
 exports.index = function (req, res) {
 	logger.debug('Entering paperAnswer.index with exam Id', req.params.examId);
