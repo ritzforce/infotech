@@ -52,7 +52,7 @@ function queryQuestion(req, res, result, requestBody){
 
 	var selectQuery = 	"select CONCAT(IF(aCorrect,'a',''), IF(bCorrect,'b',''), IF(cCorrect,'c',''), " +
 						"IF(dCorrect,'d',''), IF(eCorrect,'e',''), " +
-     					"IF(fCorrect,'f','')) AS answer FROM Question WHERE id = " + sqlHelper.escape(requestBody.questionId); 
+     					"IF(fCorrect,'f','')) AS answer FROM question WHERE id = " + sqlHelper.escape(requestBody.questionId); 
 
 	
 	apiUtils.select(req, res, selectQuery, function(questionResultArr){

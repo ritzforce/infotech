@@ -34,7 +34,7 @@ function generateQueryForCorrectAnswerReview(paperId){
 	queryArr.push(' from exam JOIN question ON (question.examId = exam.id)   ');
 	queryArr.push(' JOIN paper ON (paper.examId = exam.id)  ');
 	queryArr.push(' WHERE paper.id = ' + sqlHelper.escape(paperId) + ')');
-	queryArr.push(' AS Q LEFT JOIN paperAnswer ON (pid = paperAnswer.paperId ');
+	queryArr.push(' AS Q LEFT JOIN paperanswer ON (pid = paperanswer.paperId ');
 	queryArr.push(' AND qId = questionId ) ');  
 
 	return queryArr.join(' ');
@@ -62,8 +62,8 @@ function getPaperDetails(req, res, paperId) {
 	logger.debug('Entering paperController.getPaperDetails with paperId ', paperId);
 	var queryArr = [];
 
-	queryArr.push('select examId, paperId,count(*) As correctAnswer from paper, paperAnswer ');
-	queryArr.push(' WHERE paper.id = paperAnswer.paperid ');
+	queryArr.push('select examId, paperId,count(*) As correctAnswer from paper, paperanswer ');
+	queryArr.push(' WHERE paper.id = paperanswer.paperid ');
 	queryArr.push(' AND correct = true ');
 	queryArr.push(' AND paperId = ' + paperId);
 	queryArr.push(' GROUP BY examId, paperId ');
