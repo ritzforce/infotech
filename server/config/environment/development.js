@@ -10,10 +10,10 @@ module.exports = {
 
   sql: {
     maxLimit: 100,
-    host: '127.0.0.1',
-    user : 'root',
-    password: '',
-    database: 'examination'
+    host: '43.255.154.28',
+    user : 'alpha101',
+    password: 'ciitdc#123',
+    database: 'Sharma_Infotech'
   },
 
   log: {

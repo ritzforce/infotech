@@ -22,7 +22,7 @@ exports.index = function (req, res) {
 
 exports.indexByExam = function (req, res) {
 	logger.debug('Entering userExam.controller.indexByExam with ExamID = ' + req.params.examId);
-	var query = 'SELECT userexam.id, user.email, user.name, user.active FROM USER INNER JOIN USEREXAM ON user.id = userExam.userId '
+	var query = 'SELECT userexam.id, user.email, user.name, user.active FROM user INNER JOIN userexam ON user.id = userExam.userId '
 	query += ' WHERE userExam.examId = ' + sqlHelper.escape(req.params.examId);
 
 	apiUtils.select(req, res, query, function (result) {
@@ -35,7 +35,7 @@ exports.indexByExam = function (req, res) {
 
 exports.indexByExamNew = function(req, res){
 	logger.debug('Entering userExam.controller.indexByExamNew with ExamID = ' + req.params.examId);
-	var query = 'SELECT user.id, user.email, user.name, user.active FROM USER WHERE Id NOT IN '
+	var query = 'SELECT user.id, user.email, user.name, user.active FROM user WHERE Id NOT IN '
 	query += ' (SELECT userId FROM userexam WHERE ExamId = ' + sqlHelper.escape(req.params.examId)  + ')';
 	query += ' AND role = \'user\' ';
 
@@ -50,7 +50,7 @@ exports.indexByExamNew = function(req, res){
 
 exports.indexByUser = function (req, res) {
 	logger.debug('Entering userExam.controller.indexByUser with userId' + req.params.userId);
-	var query = 'SELECT userexam.id, exam.name, exam.code, exam.category, exam.active FROM Exam INNER JOIN USEREXAM ON exam.id = userExam.examId '
+	var query = 'SELECT userexam.id, exam.name, exam.code, exam.category, exam.active FROM exam INNER JOIN userexam ON exam.id = userExam.examId '
 	query += ' WHERE userExam.userId = ' + sqlHelper.escape(req.params.userId);
 
 	apiUtils.select(req, res, query, function (result) {
@@ -63,8 +63,8 @@ exports.indexByUser = function (req, res) {
 
 exports.indexByUserNew = function (req, res) {
 	logger.debug('Entering userExam.controller.indexByUserNew with userId' + req.params.userId);
-	var query = 'SELECT id, name, code, category, active FROM Exam WHERE id NOT IN '
-	query += ' (SELECT ExamId FROM UserExam WHERE userId = ' + sqlHelper.escape(req.params.userId) + ')';
+	var query = 'SELECT id, name, code, category, active FROM exam WHERE id NOT IN '
+	query += ' (SELECT ExamId FROM userexam WHERE userId = ' + sqlHelper.escape(req.params.userId) + ')';
 	
 	apiUtils.select(req, res, query, function (result) {
 		logger.debug('Results for indexByUserNew query', result);
