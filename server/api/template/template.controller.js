@@ -13,8 +13,6 @@ var Converter = require("csvtojson").Converter;
 var mysqlDump = require('mysqldump');
 var config = require('../../config/environment');
 
-
-
 exports.download = function(req, res){
 	logger.debug('Entering template.download for file ', req.params.fileName);
 	var filePath = path.join(__dirname, './../../', 'downloads/', req.params.fileName);
@@ -58,7 +56,7 @@ exports.upload = function(req, res){
 
 exports.lastBackup = function(req, res){
 	logger.debug('Entering template.lastBackup');
-	apiUtils.select(req, res, 'SELECT DATEDIFF(CURDATE(),DATE) AS date FROM Backup ORDER BY DATE ASC LIMIT 1', function(result){
+	apiUtils.select(req, res, 'SELECT DATEDIFF(CURDATE(),DATE) AS date FROM backup ORDER BY DATE ASC LIMIT 1', function(result){
 		if(result.length === 0){
 			return res.json({'days': -1});
 		}

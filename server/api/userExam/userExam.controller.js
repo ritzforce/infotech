@@ -22,8 +22,8 @@ exports.index = function (req, res) {
 
 exports.indexByExam = function (req, res) {
 	logger.debug('Entering userExam.controller.indexByExam with ExamID = ' + req.params.examId);
-	var query = 'SELECT userexam.id, user.email, user.name, user.active FROM user INNER JOIN userexam ON user.id = userExam.userId '
-	query += ' WHERE userExam.examId = ' + sqlHelper.escape(req.params.examId);
+	var query = 'SELECT userexam.id, user.email, user.name, user.active FROM user INNER JOIN userexam ON user.id = userexam.userId '
+	query += ' WHERE userexam.examId = ' + sqlHelper.escape(req.params.examId);
 
 	apiUtils.select(req, res, query, function (result) {
 		logger.debug('Results for indexByExam query', result);
@@ -50,8 +50,8 @@ exports.indexByExamNew = function(req, res){
 
 exports.indexByUser = function (req, res) {
 	logger.debug('Entering userExam.controller.indexByUser with userId' + req.params.userId);
-	var query = 'SELECT userexam.id, exam.name, exam.code, exam.category, exam.active FROM exam INNER JOIN userexam ON exam.id = userExam.examId '
-	query += ' WHERE userExam.userId = ' + sqlHelper.escape(req.params.userId);
+	var query = 'SELECT userexam.id, exam.name, exam.code, exam.category, exam.active FROM exam INNER JOIN userexam ON exam.id = userexam.examId '
+	query += ' WHERE userexam.userId = ' + sqlHelper.escape(req.params.userId);
 
 	apiUtils.select(req, res, query, function (result) {
 		logger.debug('Results for indexByUser query', result);
